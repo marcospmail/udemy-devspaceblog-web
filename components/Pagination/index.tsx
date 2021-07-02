@@ -1,0 +1,37 @@
+import Link from "next/link"
+import React from "react"
+
+interface PaginationProps {
+  currentPage: number
+  numPages: number
+}
+
+export default function Pagination({ currentPage, numPages }: PaginationProps) {
+  const isFirst = currentPage === 1
+  const isLast = currentPage === numPages
+  const previousPage = `/blog/page/${currentPage - 1}`
+  const nextPage = `/blog/page/${currentPage + 1}`
+
+  if (numPages === 1) return null
+
+  return (
+    <div className="mt-6">
+      <ul className="flex pl-0 list-none my-2">
+        {!isFirst && (
+          <Link href={previousPage} passHref>
+            <li className="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-gray-800 mr-1 hover:bg-gray-200 cursor-pointer" >
+              Previous
+            </li>
+          </Link>
+        )}
+        {!isLast && (
+          <Link href={nextPage} passHref>
+            <li className="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-gray-800 mr-1 hover:bg-gray-200 cursor-pointer" >
+              Next
+            </li>
+          </Link>
+        )}
+      </ul>
+    </div>
+  )
+}

@@ -1,3 +1,4 @@
+
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -6,9 +7,15 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 import Post from '../components/Post'
 
-export default function Home({ posts }) {
-  console.log(posts)
+import { Post as PostType } from "../types";
 
+import { sortPostsByDate } from '../utils'
+
+interface HomeProps {
+  posts: PostType[]
+}
+
+export default function Home({ posts }: HomeProps) {
   return (
     <Layout>
       <h1 className="text-5xl border-b-4 p-5 font-bold">Latest Posts</h1>
@@ -46,11 +53,11 @@ export function getStaticProps() {
       slug,
       frontmatter
     }
-  })
+  }) as PostType[]
 
   return {
     props: {
-      posts
+      posts: posts.sort(sortPostsByDate).slice(0, 6)
     }
   }
 }
