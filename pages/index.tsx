@@ -1,15 +1,11 @@
-
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
 import Link from 'next/link'
 
-import Layout from '../components/Layout'
-import Post from '../components/Post'
+import Layout from '@/components/Layout'
+import Post from '@/components/Post'
 
-import { Post as PostType } from "../types";
+import { Post as PostType } from "@/types/index";
 
-import { sortPostsByDate } from '../utils'
+import { getPosts } from 'lib/posts'
 
 interface HomeProps {
   posts: PostType[]
@@ -37,27 +33,11 @@ export default function Home({ posts }: HomeProps) {
 }
 
 export function getStaticProps() {
-  const files = fs.readdirSync(path.join('posts'))
-
-  const posts = files.map(v => {
-    const slug = v.replace('.md', '')
-
-    const mardownWithMeta = fs.readFileSync(
-      path.join('posts', v),
-      'utf-8'
-    )
-
-    const { data: frontmatter } = matter(mardownWithMeta)
-
-    return {
-      slug,
-      frontmatter
-    }
-  }) as PostType[]
+  const posts = getPosts()
 
   return {
     props: {
-      posts: posts.sort(sortPostsByDate).slice(0, 6)
+      posts: posts.slice(0, 6)
     }
   }
 }

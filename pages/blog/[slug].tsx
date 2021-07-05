@@ -27,7 +27,8 @@ export default function BlogPost({ content, slug, frontmatter }: PostProps) {
           <h1 className="text-5xl mb-7">{frontmatter.title}</h1>
         </div>
 
-        <Image src={frontmatter.cover_image} alt="Cover image" className="w-full rounded" width={'100%'} height="100%" />
+        {/* <Image src={frontmatter.cover_image} alt="Cover image" className="w-full rounded" width={'100%'} height="100%" /> */}
+        <img src={frontmatter.cover_image} alt="Cover image" className="w-full rounded" width={'100%'} height="100%" />
 
         <div className="flex justify-between items-center bg-gray-100 p-2 my-8">
           <div className="flex items-center">
