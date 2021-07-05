@@ -10,7 +10,7 @@ interface SearchResultProps {
 
 export default function SearchResults({ results }: SearchResultProps) {
   return (
-    <div className="absolute top-20 right-0 border-4 border-gray-500 bg-white text-black w-96 rounded-2xl overflow-y-scroll" style={{ height: '80vh' }}>
+    <div className="absolute top-20 right-0 border-4 border-gray-500 bg-white text-black w-96 rounded-2xl overflow-y-scroll" style={{ maxHeight: '80vh' }}>
       <div className="p-10">
         {results.map((result, index) => (
           <Post key={index} post={result} compact/>
