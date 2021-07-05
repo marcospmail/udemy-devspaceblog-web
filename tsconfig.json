@@ -6,6 +6,7 @@
       "@/config/*": ["config/*"],
       "@/utils/*": ["utils/*"],
       "@/types/*": ["types/*"],
+      "@/lib/*": ["lib/*"],
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
